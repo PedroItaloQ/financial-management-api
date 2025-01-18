@@ -6,6 +6,8 @@ import { JwtStrategy } from '../auth/strategies/jwt.strategy';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategies/local.strategy';
 import { AuthController } from './auth.controller'; // Importe o controlador
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 console.log('MONGO_URI:', process.env.MONGO_URI); // Verifica a conexão com o banco
 console.log('SESSION_SECRET:', process.env.SESSION_SECRET); // Verifica a chave secreta
@@ -23,4 +25,5 @@ console.log('SESSION_SECRET:', process.env.SESSION_SECRET); // Verifica a chave 
   controllers: [AuthController], // Adicione o AuthController aqui
   providers: [AuthService, JwtStrategy, LocalStrategy], // Inclua o LocalStrategy
 })
+
 export class AuthModule {}
