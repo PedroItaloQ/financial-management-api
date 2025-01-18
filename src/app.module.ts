@@ -2,31 +2,27 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module'; // Novo módulo para autenticação
-import * as session from 'express-session';
+import { AuthModule } from './auth/auth.module'; // Módulo de autenticação
+import * as cookieParser from 'cookie-parser';
+
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
+      envFilePath: '.env', // Carrega variáveis do arquivo .env
     }),
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRoot(process.env.MONGO_URI), // Conecta ao MongoDB
     UsersModule,
-    AuthModule, // Adicionado
+    AuthModule, // Importa o módulo de autenticação
   ],
 })
 export class AppModule {
   configure(consumer: any) {
     consumer
-      .apply(
-        session({
-          secret: process.env.SESSION_SECRET || 'secret_key',
-          resave: false,
-          saveUninitialized: false,
-          cookie: { secure: false }, // Para produção, configure como `true`
-        }),
-      )
-      .forRoutes('*');
+      .apply(cookieParser()) // Middleware para processar cookies
+      .forRoutes('*');       // Aplica para todas as rotas
   }
 }
