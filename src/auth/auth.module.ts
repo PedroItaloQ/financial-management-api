@@ -18,7 +18,7 @@ console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
     PassportModule,
     JwtModule.register({
       secret: process.env.SESSION_SECRET,
-      signOptions: { expiresIn: '8h' },
+      signOptions: { expiresIn: '4h' },
     }),
     UsersModule,
   ],
