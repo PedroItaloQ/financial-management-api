@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
-import { UserDocument } from '../users/users.schema'; // Importe o tipo correto
+import { UserDocument } from '../users/users.schema';
 
 @Injectable()
 export class AuthService {
