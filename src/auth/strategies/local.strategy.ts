@@ -6,7 +6,7 @@ import { AuthService } from '../auth.service';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super({ usernameField: 'email' }); // Certifique-se de que está 'email'
+    super({ usernameField: 'email' });
   }
 
   async validate(email: string, password: string): Promise<any> {
@@ -16,7 +16,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     const user = await this.authService.validateUser(email, password);
     if (!user) {
       console.log('LocalStrategy - Usuário não autorizado');
-      throw new UnauthorizedException(); // Retorna 401 em caso de falha
+      throw new UnauthorizedException();
     }
     console.log('LocalStrategy - Usuário autorizado:', user);
     return user;

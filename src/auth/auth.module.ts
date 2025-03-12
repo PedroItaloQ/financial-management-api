@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { UsersModule } from '../users/users.module'; // Importe o UsersModule aqui
+import { UsersModule } from '../users/users.module';
 import { JwtStrategy } from '../auth/strategies/jwt.strategy';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategies/local.strategy';
-import { AuthController } from './auth.controller'; // Importe o controlador
+import { AuthController } from './auth.controller';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-console.log('MONGO_URI:', process.env.MONGO_URI); // Verifica a conexão com o banco
-console.log('SESSION_SECRET:', process.env.SESSION_SECRET); // Verifica a chave secreta
+console.log('MONGO_URI:', process.env.MONGO_URI);
+console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
 
 
 @Module({
@@ -18,12 +18,12 @@ console.log('SESSION_SECRET:', process.env.SESSION_SECRET); // Verifica a chave 
     PassportModule,
     JwtModule.register({
       secret: process.env.SESSION_SECRET,
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '4h' },
     }),
     UsersModule,
   ],
-  controllers: [AuthController], // Adicione o AuthController aqui
-  providers: [AuthService, JwtStrategy, LocalStrategy], // Inclua o LocalStrategy
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy, LocalStrategy],
 })
 
 export class AuthModule {}
