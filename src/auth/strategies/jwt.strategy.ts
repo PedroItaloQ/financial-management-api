@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          return request?.cookies?.access_token; // 🔥 Extraindo o token dos cookies
+          return request?.cookies?.access_token;
         },
       ]),
       ignoreExpiration: false,
@@ -19,6 +19,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: any) {
     console.log('🔹 Validando token JWT:', payload);
-    return { _id: payload.sub, email: payload.email }; // 🔥 Agora retorna _id corretamente!
+    return { _id: payload.sub, email: payload.email };
   }
 }
