@@ -7,10 +7,10 @@ import { JwtAuthGuard } from '../auth/strategies/jwt-auth.guard';
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @UseGuards(JwtAuthGuard) // Garantindo que o usuário está autenticado
+  @UseGuards(JwtAuthGuard)
   @Post('create')
   async createCategory(@Body('name') name: string, @Request() req) {
-    console.log('🔹 Criando categoria, Usuário autenticado:', req.user);
+    console.log('Criando categoria, Usuário autenticado:', req.user);
 
     if (!req.user) {
       throw new Error('Usuário não autenticado! Verifique se o token está sendo enviado corretamente.');

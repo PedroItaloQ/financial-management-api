@@ -11,7 +11,7 @@ export class CategoriesService {
   ) {}
 
   async createCategory(name: string, user: UserDocument): Promise<Category> {
-    console.log('🔹 Service - Criando categoria com usuário:', user);
+    console.log('Service - Criando categoria com usuário:', user);
 
     if (!user || !user._id) {
       throw new Error('Erro: O usuário autenticado não contém um ID válido!');

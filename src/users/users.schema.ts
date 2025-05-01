@@ -3,15 +3,15 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class User {
-  @Prop({ required: true, unique: true }) // Campo único
+  @Prop({ required: true, unique: true })
   username: string;
 
-  @Prop({ required: true, unique: true }) // Adiciona email
+  @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop({ required: true }) // Campo obrigatório
+  @Prop({ required: true })
   password: string;
 }
 
-export type UserDocument = User & Document;
+export type UserDocument = Document & User;
 export const UserSchema = SchemaFactory.createForClass(User);
